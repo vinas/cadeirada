@@ -1,0 +1,79 @@
+@font-face {
+    font-family: BitParty;
+    src: url('../font/8_bit_party.ttf');
+}
+
+@font-face {
+    font-family: BitOperator;
+    src: url('../font/8bitoperator.ttf');
+}
+
+
+body {
+	font-family: BitParty;
+	overflow: hidden;
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+
+.fundo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #ccc;
+	background-image: url('../img/background.gif');
+	background-size: cover;
+	color: #FFFFFF;
+}
+
+.personagem {
+	display: block;
+	position: absolute;
+	width: 150px;
+	height: 130px;
+}
+
+.tardis {
+	display: block;
+	position: absolute;
+	width: 80px;
+	height: 130px;
+}
+
+.tiro {
+	display: none;
+	position: absolute;
+	width: 15px;
+	height: 5px;
+	background-color: #000;
+}
+
+#leftSensor {
+	float: left;
+	position: absolute;
+	width: 40%;
+	height: 100%;
+	left: 0px;
+	top: 0px;
+}
+
+#rightSensor {
+	float: left;
+	position: absolute;
+	width: 40%;
+	height: 100%;
+	left: 60%;
+	top: 0px;
+}
+
+.score {
+	float: left;
+	position: absolute;
+	left: 90%;
+	top: 85%;
+	font-family: BitOperator;
+	font-size: 32px;
+	color: #FFF;
+}
