@@ -44,10 +44,12 @@ $(document).on("ready", function() {
                 Math.floor(Math.random() * (MAPVERSIZE - MARCALHEIGHT))
             );
         score = 0;
+        datenaPos = 0;
         marcalSpeed = 5;
         marcalVis = true;
         posShot[0] = datenawidth;
         posShot[1] = 0 + 12;
+        document.getElementById("marcal").src="img/marcal-run.gif";
         $("#datena").css("top", 0);
         $("#datena").css("left", 10);
         $("#marcal").css("top", posMarcal[1]);
@@ -94,6 +96,7 @@ $(document).on("ready", function() {
     };
 
     $.gameOver = function() {
+        document.getElementById("marcal").src="img/marcal-m.gif";
         $("#fundo").hide();
         $("#datena").hide();
         $("#tiro").hide();
@@ -181,6 +184,8 @@ $(document).on("ready", function() {
     });
 
     $("#gameOver").on("touchstart", function() {
+        $("#marcal").css("left", 0);
+        posMarcal[0] = 0;
         $.resetGame();
     });
 
