@@ -61,6 +61,11 @@ body {
 	height: 130px;
 }
 
+.fazom {
+	width: 80px;
+	height: 130px;
+}
+
 .tiro {
 	display: none;
 	position: absolute;

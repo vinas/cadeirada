@@ -49,13 +49,13 @@ $(document).on("ready", function() {
         marcalVis = true;
         posShot[0] = datenawidth;
         posShot[1] = 0 + 12;
-        document.getElementById("marcal").src="img/marcal-run.gif";
         $("#datena").css("top", 0);
         $("#datena").css("left", 10);
         $("#marcal").css("top", posMarcal[1]);
         $("#marcal").css("left", posMarcal[0]);
         $("#fundo").show();
         $("#datena").show();
+        $("#marcal").show();
         $("#leftSensor").show();
         $("#rightSensor").show();
         $("#gameOver").hide();
@@ -96,9 +96,9 @@ $(document).on("ready", function() {
     };
 
     $.gameOver = function() {
-        document.getElementById("marcal").src="img/marcal-m.gif";
         $("#fundo").hide();
         $("#datena").hide();
+        $("#marcal").hide();
         $("#tiro").hide();
         $("#gameOver").show();
         $("#leftSensor").hide();
@@ -184,8 +184,6 @@ $(document).on("ready", function() {
     });
 
     $("#gameOver").on("touchstart", function() {
-        $("#marcal").css("left", 0);
-        posMarcal[0] = 0;
         $.resetGame();
     });
 
