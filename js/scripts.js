@@ -43,7 +43,14 @@ $(document).on("ready", function() {
                 (MAPHORSIZE - MARCALWIDTH),
                 Math.floor(Math.random() * (MAPVERSIZE - MARCALHEIGHT))
             );
-    }
+        $("#fundo").show();
+        $("#datena").show();
+        $("#leftSensor").show();
+        $("#rightSensor").show();
+        $("#gameOver").hide();
+        score = 0;
+        $("#score").html(score);
+    };
 
     $.resetGame = function() {
         setTimeout(function() {
@@ -56,12 +63,12 @@ $(document).on("ready", function() {
             },
             300
         );
-    }
+    };
 
     $.moveMarcal = function() {
         if (marcalVis === true) {
 
-            var marcalInterval = setInterval(function() {
+            marcalInterval = setInterval(function() {
                 $("#marcal").css("left", posMarcal[0]);
                 $("#marcal").css("top", posMarcal[1]);
 
@@ -74,13 +81,22 @@ $(document).on("ready", function() {
 
                     //$("#marcal").css("left", posMarcal[0]);
                 } else {
-                    $("#tiro").hide();
+                    $.gameOver();
                     marcalVis = false;
                     clearInterval(marcalInterval);
                 }
             }, 50);
         }
-    }
+    };
+
+    $.gameOver = function() {
+        $("#fundo").hide();
+        $("#datena").hide();
+        $("#tiro").hide();
+        $("#gameOver").show();
+        $("#leftSensor").hide();
+        $("#rightSensor").hide();
+    };
 
     $.shoot = function() {
         if (shotVis === false) {
@@ -97,11 +113,11 @@ $(document).on("ready", function() {
                 var shotInterval = setInterval(function() {
                     if ($.hit()) {
                         marcalVis = false;
+                        shotVis = false;
                         $("#marcal").hide();
+                        tiro.hide();
                         score = score + 1;
                         $("#score").html(score);
-                        tiro.hide();
-                        shotVis = false;
                         $.resetMarcal();
                         clearInterval(shotInterval);
                     } else if (posShot[0] <= (MAPHORSIZE - chairWidth - 5)) {
@@ -115,7 +131,7 @@ $(document).on("ready", function() {
                 }, 5);
             }, 200);
         }
-    }
+    };
 
     $.resetMarcal = function() {
         marcalVis = false;
@@ -130,7 +146,7 @@ $(document).on("ready", function() {
             marcalVis = true;
         }, 50);
 
-    }
+    };
 
     $.hit = function() {
         if (
@@ -160,8 +176,11 @@ $(document).on("ready", function() {
         $.shoot();
     });
 
+    $("#gameOver").on("touchstart", function() {
+        $.resetGame();
+    });
 
     /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-    $.resetGame()
+    $.resetGame();
 
 });
