@@ -46,6 +46,12 @@ $(document).on("ready", function() {
         score = 0;
         marcalSpeed = 5;
         marcalVis = true;
+        posShot[0] = datenawidth;
+        posShot[1] = 0 + 12;
+        $("#datena").css("top", 0);
+        $("#datena").css("left", 10);
+        $("#marcal").css("top", posMarcal[1]);
+        $("#marcal").css("left", posMarcal[0]);
         $("#fundo").show();
         $("#datena").show();
         $("#leftSensor").show();
@@ -57,10 +63,6 @@ $(document).on("ready", function() {
     $.resetGame = function() {
         setTimeout(function() {
                 $.setupGame();
-                $("#datena").css("top", 0);
-                $("#datena").css("left", 10);
-                $("#marcal").css("top", posMarcal[1]);
-                $("#marcal").css("left", posMarcal[0]);
                 $.moveMarcal();
             },
             300
