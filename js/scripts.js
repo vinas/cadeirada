@@ -43,12 +43,14 @@ $(document).on("ready", function() {
                 (MAPHORSIZE - MARCALWIDTH),
                 Math.floor(Math.random() * (MAPVERSIZE - MARCALHEIGHT))
             );
+        score = 0;
+        marcalSpeed = 5;
+        marcalVis = true;
         $("#fundo").show();
         $("#datena").show();
         $("#leftSensor").show();
         $("#rightSensor").show();
         $("#gameOver").hide();
-        score = 0;
         $("#score").html(score);
     };
 
