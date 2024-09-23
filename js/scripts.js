@@ -84,32 +84,36 @@ $(document).on("ready", function() {
 
     $.shoot = function() {
         if (shotVis === false) {
-            shotVis = true;
-            tiro = $("#tiro");
-            posShot[0] = datenawidth;
-            posShot[1] = datenaPos + 12;
-            tiro.css("top", posShot[1]);
-            tiro.css("left", posShot[0]);
-            tiro.show();
-            var shotInterval = setInterval(function() {
-                if ($.hit()) {
-                    marcalVis = false;
-                    $("#marcal").hide();
-                    score = score + 1;
-                    $("#score").html(score);
-                    tiro.hide();
-                    shotVis = false;
-                    $.resetMarcal();
-                    clearInterval(shotInterval);
-                } else if (posShot[0] <= (MAPHORSIZE - chairWidth - 5)) {
-                    posShot[0] = posShot[0] + 10;
-                    tiro.css("left", posShot[0]);
-                } else {
-                    tiro.hide();
-                    shotVis = false;
-                    clearInterval(shotInterval);
-                }
-            }, 5);
+            document.getElementById("datena").src="img/datena-chair.gif";
+            setTimeout(() => {
+                document.getElementById("datena").src="img/datena-run.gif";
+                shotVis = true;
+                tiro = $("#tiro");
+                posShot[0] = datenawidth;
+                posShot[1] = datenaPos + 12;
+                tiro.css("top", posShot[1]);
+                tiro.css("left", posShot[0]);
+                tiro.show();
+                var shotInterval = setInterval(function() {
+                    if ($.hit()) {
+                        marcalVis = false;
+                        $("#marcal").hide();
+                        score = score + 1;
+                        $("#score").html(score);
+                        tiro.hide();
+                        shotVis = false;
+                        $.resetMarcal();
+                        clearInterval(shotInterval);
+                    } else if (posShot[0] <= (MAPHORSIZE - chairWidth - 5)) {
+                        posShot[0] = posShot[0] + 10;
+                        tiro.css("left", posShot[0]);
+                    } else {
+                        tiro.hide();
+                        shotVis = false;
+                        clearInterval(shotInterval);
+                    }
+                }, 5);
+            }, 200);
         }
     }
 
