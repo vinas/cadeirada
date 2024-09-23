@@ -1,19 +1,21 @@
 var tecla,
     keyBump,
-    dalekMovement,
-    posDalek = 0,
+    datenaMovement,
+    datenaPos = 0,
+    datenaSpeed = 10,
+    datenaHeight = 130,
+    datenawidth = 80,
+    chairWidth = 100,
+    chairHeight = 100,
     shotVis = false,
-    tardisVis = true,
-    dalekSpeed = 10,
-    tiroWidth = 15,
+    marcalVis = true,
     MAPHORSIZE = 900,
     MAPVERSIZE = 400,
-    dalekHeight = 130,
     CROSSBORDERTOLERANCE = 15,
-    TARDISHEIGHT = 130,
-    TARDISWIDTH = 80,
-    tardisSpeed = 5,
-    posTardis,
+    MARCALHEIGHT = 130,
+    MARCALWIDTH = 80,
+    marcalSpeed = 5,
+    posMarcal,
     score = 0;
 
 var posShot = new Array(0 ,0);
@@ -37,44 +39,44 @@ $(document).on("ready", function() {
     $.setupGame = function() {
         MAPHORSIZE = $("#fundo").css("width").replace(new RegExp("px", 'g'), "");
         MAPVERSIZE = $("#fundo").css("height").replace(new RegExp("px", 'g'), "");
-        posTardis = new Array(
-                (MAPHORSIZE - TARDISWIDTH),
-                Math.floor(Math.random() * (MAPVERSIZE - TARDISHEIGHT))
+        posMarcal = new Array(
+                (MAPHORSIZE - MARCALWIDTH),
+                Math.floor(Math.random() * (MAPVERSIZE - MARCALHEIGHT))
             );
     }
 
     $.resetGame = function() {
         setTimeout(function() {
                 $.setupGame();
-                $("#dalek").css("top", 0);
-                $("#dalek").css("left", 10);
-                $("#tardis").css("top", posTardis[1]);
-                $("#tardis").css("left", posTardis[0]);
-                $.moveTardis();
+                $("#datena").css("top", 0);
+                $("#datena").css("left", 10);
+                $("#marcal").css("top", posMarcal[1]);
+                $("#marcal").css("left", posMarcal[0]);
+                $.moveMarcal();
             },
             300
         );
     }
 
-    $.moveTardis = function() {
-        if (tardisVis === true) {
+    $.moveMarcal = function() {
+        if (marcalVis === true) {
 
-            var tardisInterval = setInterval(function() {
-                $("#tardis").css("left", posTardis[0]);
-                $("#tardis").css("top", posTardis[1]);
+            var marcalInterval = setInterval(function() {
+                $("#marcal").css("left", posMarcal[0]);
+                $("#marcal").css("top", posMarcal[1]);
 
-                if (posTardis[0] > 0) {
-                    posTardis[0] = posTardis[0] - tardisSpeed;
-                    $("#tardis").animate(
-                        {left: posTardis[0]},
+                if (posMarcal[0] > 0) {
+                    posMarcal[0] = posMarcal[0] - marcalSpeed;
+                    $("#marcal").animate(
+                        {left: posMarcal[0]},
                         30
                     );
 
-                    //$("#tardis").css("left", posTardis[0]);
+                    //$("#marcal").css("left", posMarcal[0]);
                 } else {
                     $("#tiro").hide();
-                    tardisVis = false;
-                    clearInterval(tardisInterval);
+                    marcalVis = false;
+                    clearInterval(marcalInterval);
                 }
             }, 50);
         }
@@ -84,22 +86,22 @@ $(document).on("ready", function() {
         if (shotVis === false) {
             shotVis = true;
             tiro = $("#tiro");
-            posShot[0] = 150;
-            posShot[1] = posDalek + tiroWidth + 12;
+            posShot[0] = datenawidth;
+            posShot[1] = datenaPos + 12;
             tiro.css("top", posShot[1]);
             tiro.css("left", posShot[0]);
             tiro.show();
             var shotInterval = setInterval(function() {
                 if ($.hit()) {
-                    tardisVis = false;
-                    $("#tardis").hide();
+                    marcalVis = false;
+                    $("#marcal").hide();
                     score = score + 1;
                     $("#score").html(score);
                     tiro.hide();
                     shotVis = false;
-                    $.resetTardis();
+                    $.resetMarcal();
                     clearInterval(shotInterval);
-                } else if (posShot[0] <= (MAPHORSIZE - tiroWidth - 5)) {
+                } else if (posShot[0] <= (MAPHORSIZE - chairWidth - 5)) {
                     posShot[0] = posShot[0] + 10;
                     tiro.css("left", posShot[0]);
                 } else {
@@ -111,17 +113,17 @@ $(document).on("ready", function() {
         }
     }
 
-    $.resetTardis = function() {
-        tardisVis = false;
-        $("#tardis").hide();
-        tardisSpeed = tardisSpeed + 1
-        posTardis[0] = MAPHORSIZE - TARDISWIDTH;
-        posTardis[1] = Math.floor(Math.random() * (MAPVERSIZE - TARDISHEIGHT));
-        $("#tardis").css("left", posTardis[0]);
-        $("#tardis").css("top", posTardis[1]);
+    $.resetMarcal = function() {
+        marcalVis = false;
+        $("#marcal").hide();
+        marcalSpeed = marcalSpeed + 1
+        posMarcal[0] = MAPHORSIZE - MARCALWIDTH;
+        posMarcal[1] = Math.floor(Math.random() * (MAPVERSIZE - MARCALHEIGHT));
+        $("#marcal").css("left", posMarcal[0]);
+        $("#marcal").css("top", posMarcal[1]);
         setTimeout(function() {
-            $("#tardis").show();
-            tardisVis = true;
+            $("#marcal").show();
+            marcalVis = true;
         }, 50);
 
     }
@@ -129,11 +131,11 @@ $(document).on("ready", function() {
     $.hit = function() {
         if (
             (
-                (posShot[0] >= (posTardis[0] - 20)) &&
-                (posShot[0] < (posTardis[0] + 35))
+                (posShot[0] >= (posMarcal[0] - chairWidth)) &&
+                (posShot[0] < (posMarcal[0] + chairWidth))
             ) && (
-                (posShot[1] >= posTardis[1]) &&
-                (posShot[1] < (posTardis[1] + TARDISHEIGHT))
+                (posShot[1] + chairHeight >= posMarcal[1]) &&
+                (posShot[1] < (posMarcal[1] + MARCALHEIGHT))
             )
         ){
             return true;
@@ -143,13 +145,11 @@ $(document).on("ready", function() {
 
     $(".tapMove").on("touchstart", function() {
         posY = event.touches[0].pageY;
-        posDalek = posY - 28;
-        console.log(posDalek);
-        $("#dalek").animate(
-            {top: posDalek},
+        datenaPos = posY - 28;
+        $("#datena").animate(
+            {top: datenaPos},
             100
         );
-        //$("#dalek").css("top", posDalek);
     });
     
     $(".tapShoot").on("touchstart", function() {
