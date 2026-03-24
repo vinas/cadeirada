@@ -20,7 +20,8 @@ var tecla,
 
 var posShot = new Array(0 ,0);
 
-$(document).on("dblclick", function() {
+$(document).on("dblclick", function(e) {
+    e.preventDefault();
     return false;
 });
 
