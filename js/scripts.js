@@ -1,9 +1,4 @@
-var tecla,
-    keyBump,
-    datenaMovement,
-    datenaPos = 0,
-    datenaSpeed = 10,
-    datenaHeight = 130,
+var datenaPos = 0,
     datenawidth = 80,
     chairWidth = 100,
     chairHeight = 100,
@@ -11,7 +6,6 @@ var tecla,
     marcalVis = true,
     MAPHORSIZE = 900,
     MAPVERSIZE = 400,
-    CROSSBORDERTOLERANCE = 15,
     MARCALHEIGHT = 130,
     MARCALWIDTH = 80,
     marcalSpeed = 5,
@@ -23,16 +17,6 @@ var posShot = new Array(0 ,0);
 $(document).on("dblclick", function(e) {
     e.preventDefault();
     return false;
-});
-
-$(document).on("keydown", function(e) {
-    tecla = e.which;
-    //if (tecla != 123) return false;
-});
-
-$(document).on("keyup", function(e) {
-    tecla = false;
-    //if (tecla != 123) return false;
 });
 
 $(document).on("ready", function() {
